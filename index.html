@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NYG三生万物创意平台</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #e71f9a;
+            --secondary-color: #10b981;
+            --accent-color: #da1758;
+            --bg-color: #f8fafc;
+            --dark-bg: #1e293b;
+            --text-color: #111111;
+            --border-color: #e2e8f0;
+        }
+        
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+        
+        .platform-container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .chat-container {
+            height: 500px;
+            border-radius: 12px;
+            background-color: white;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .chat-messages {
+            height: calc(100% - 80px);
+            overflow-y: auto;
+        }
+        
+        .message {
+            padding: 12px 16px;
+            margin: 8px;
+            border-radius: 8px;
+            max-width: 80%;
+        }
+        
+        .user-message {
+            background-color: var(--primary-color);
+            color: white;
+            margin-left: auto;
+        }
+        
+        .system-message {
+            background-color: #f1f5f9;
+            color: var(--text-color);
+        }
+        
+        .chat-input {
+            border-top: 1px solid var(--border-color);
+            padding: 16px;
+            background: white;
+            border-radius: 0 0 12px 12px;
+        }
+        
+        .workflow-container, .material-editor, .dfm-system, .progress-board, .creator-store {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            padding: 16px;
+            margin-bottom: 24px;
+        }
+        
+        .tab-button {
+            padding: 12px 24px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-button.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 20px;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .material-preview {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            height: 200px;
+            background-color: #f1f5f9;
+        }
+        
+        .material-properties {
+            height: 200px;
+            overflow-y: auto;
+        }
+        
+        .progress-item {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            background-color: #f1f5f9;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            border-radius: 4px;
+            background-color: #e2e8f0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .workflow-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .workflow-step-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+        }
+        
+        .workflow-connector {
+            width: 2px;
+            height: 24px;
+            background-color: var(--border-color);
+            margin-left: 15px;
+        }
+        
+        .store-item {
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .store-item:hover {
+            transform: translateY(-4px);
+        }
+        
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .tooltip .tooltip-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: var(--dark-bg);
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="py-8">
+    <div class="platform-container px-4">
+        <!-- Header -->
+        <header class="mb-8">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold text-xl mr-4">
+                        NYG
+                    </div>
+                    <h1 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">NYG三生万物创意平台</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="px-4 py-2 rounded-full bg-white border border-gray-200 shadow-sm hover:shadow-md transition-all flex items-center">
+                        <i class="fas fa-user-circle mr-2 text-gray-600"></i>
+                        <span>登录</span>
+                    </button>
+                    <button class="px-4 py-2 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-sm hover:shadow-md transition-all">
+                        <i class="fas fa-rocket mr-2"></i>
+                        <span>开始创作</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Main Content -->
+        <div class="grid grid-cols-12 gap-6">
+            <!-- Left Side - Chat and Workflow -->
+            <div class="col-span-12 lg:col-span-8">
+                <!-- Chat Container -->
+                <div class="chat-container mb-6">
+                    <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-4 rounded-t-lg flex justify-between items-center">
+                        <h2 class="text-xl font-semibold">创意对话</h2>
+                        <div class="flex space-x-2">
+                            <button class="w-8 h-8 rounded-full bg-white bg-opacity-20 flex items-center justify-center">
+                                <i class="fas fa-sync-alt text-white"></i>
+                            </button>
+                            <button class="w-8 h-8 rounded-full bg-white bg-opacity-20 flex items-center justify-center">
+                                <i class="fas fa-cog text-white"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="chat-messages p-4">
+                        <div class="message system-message">
+                            <div class="font-semibold mb-1">NYG创意助手</div>
+                            <p>欢迎来到NYG三生万物创意平台！我可以帮助您设计、优化和实现您的创意。请告诉我您需要什么帮助？</p>
+                        </div>
+                        <div class="message user-message">
+                            <div class="font-semibold mb-1">您</div>
+                            <p>我想设计一个具有流线型外观的智能家居设备。</p>
+                        </div>
+                        <div class="message system-message">
+                            <div class="font-semibold mb-1">NYG创意助手</div>
+                            <p>很棒的想法！流线型设计非常适合智能家居产品。我可以帮您从以下几个方面开始：</p>
+                            <ol class="list-decimal list-inside mt-2 space-y-1">
+                                <li>确定产品的具体功能和用途</li>
+                                <li>设计符合人体工学的外观</li>
+                            </ol>
+                            <p class="mt-2">您希望从哪个方面开始探讨？</p>
+                                </div>
+                                <div class="chat-input">
+                                    <div class="flex items-center">
+                                      <!-- 输入框：固定高度 h-12，左侧圆角 -->
+                                      <input type="text" placeholder="输入您的想法或问题..." 
+                                             class="h-12 flex-1 px-4 rounded-l-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                      <!-- 按钮：固定高度 h-12，右侧圆角，去掉多余 margin -->
+                                      <button class="h-12 w-12 rounded-r-lg bg-gradient-to-r from-blue-500 to-indigo-600 text-white flex items-center justify-center hover:opacity-90 transition-opacity">
+                                        <i class="fas fa-paper-plane"></i>
+                                      </button>
+                              </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                <!-- Workflow Container -->
+                <div class="workflow-container">
+                    <h2 class="text-xl font-semibold mb-4">创意工作流</h2>
+                    <div class="workflow-steps">
+                        <div class="workflow-step">
+                            <div class="workflow-step-number">1</div>
+                            <div class="workflow-step-content">
+                                <h3 class="font-semibold">创意构思</h3>
+                                <p class="text-sm text-gray-600">定义产品功能与目标用户</p>
+                            </div>
+                        </div>
+                        <div class="workflow-connector"></div>
+                        
+                        <div class="workflow-step">
+                            <div class="workflow-step-number">2</div>
+                            <div class="workflow-step-content">
+                                <h3 class="font-semibold">概念设计</h3>
+                                <p class="text-sm text-gray-600">创建产品外观与功能框架</p>
+                            </div>
+                        </div>
+                        <div class="workflow-connector"></div>
+                        
+                        <div class="workflow-step">
+                            <div class="workflow-step-number">3</div>
+                            <div class="workflow-step-content">
+                                <h3 class="font-semibold">材质选择</h3>
+                                <p class="text-sm text-gray-600">确定产品材质与工艺方案</p>
+                            </div>
+                        </div>
+                        <div class="workflow-connector"></div>
+                        
+                        <div class="workflow-step">
+                            <div class="workflow-step-number">4</div>
+                            <div class="workflow-step-content">
+                                <h3 class="font-semibold">DFM优化</h3>
+                                <p class="text-sm text-gray-600">优化设计以确保可生产性</p>
+                            </div>
+                        </div>
+                        <div class="workflow-connector"></div>
+                        
+                        <div class="workflow-step">
+                            <div class="workflow-step-number">5</div>
+                            <div class="workflow-step-content">
+                                <h3 class="font-semibold">生产制造</h3>
+                                <p class="text-sm text-gray-600">实现产品从设计到实物的转化</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Side - Multiple Views and Tools -->
+            <div class="col-span-12 lg:col-span-4">
+                <!-- Multi-view Tabs -->
+                <div class="bg-white rounded-lg shadow mb-6">
+                    <div class="p-4 flex space-x-2 overflow-x-auto">
+                        <button class="tab-button active" data-tab="view-3d">3D视图</button>
+                        <button class="tab-button" data-tab="view-2d">2D视图</button>
+                        <button class="tab-button" data-tab="view-exploded">分解视图</button>
+                        <button class="tab-button" data-tab="view-analysis">分析视图</button>
+                    </div>
+                    
+                    <div class="tab-content active" id="view-3d">
+                        <div class="rounded-lg bg-gray-100 h-64 flex items-center justify-center">
+                            <div class="text-center">
+                                <i class="fas fa-cube text-4xl text-gray-400 mb-2"></i>
+                                <p class="text-gray-500">3D模型视图</p>
+                            </div>
+                        </div>
+                        <div class="flex justify-center mt-4 space-x-2">
+                            <button class="p-2 rounded-full bg-gray-100">
+                                <i class="fas fa-sync-alt text-gray-600"></i>
+                            </button>
+                            <button class="p-2 rounded-full bg-gray-100">
+                                <i class="fas fa-search-plus text-gray-600"></i>
+                            </button>
+                            <button class="p-2 rounded-full bg-gray-100">
+                                <i class="fas fa-search-minus text-gray-600"></i>
+                            </button>
+                            <button class="p-2 rounded-full bg-gray-100">
+                                <i class="fas fa-expand-arrows-alt text-gray-600"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="view-2d">
+                        <div class="rounded-lg bg-gray-100 h-64 flex items-center justify-center">
+                            <div class="text-center">
+                                <i class="fas fa-drafting-compass text-4xl text-gray-400 mb-2"></i>
+                                <p class="text-gray-500">2D工程图视图</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="view-exploded">
+                        <div class="rounded-lg bg-gray-100 h-64 flex items-center justify-center">
+                            <div class="text-center">
+                                <i class="fas fa-layer-group text-4xl text-gray-400 mb-2"></i>
+                                <p class="text-gray-500">零件分解视图</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="view-analysis">
+                        <div class="rounded-lg bg-gray-100 h-64 flex items-center justify-center">
+                            <div class="text-center">
+                                <i class="fas fa-chart-line text-4xl text-gray-400 mb-2"></i>
+                                <p class="text-gray-500">结构应力分析</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Material Editor -->
+                <div class="material-editor mb-6">
+                    <h2 class="text-xl font-semibold mb-4">材质编辑器</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="material-preview rounded-lg"></div>
+                        <div class="material-properties">
+                            <div class="mb-3">
+                                <label class="block text-sm font-medium mb-1">材质类型</label>
+                                <select class="w-full p-2 border border-gray-200 rounded-lg">
+                                    <option>ABS塑料</option>
+                                    <option>聚碳酸酯</option>
+                                    <option>尼龙</option>
+                                    <option>铝合金</option>
+                                    <option>不锈钢</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="block text-sm font-medium mb-1">表面处理</label>
+                                <select class="w-full p-2 border border-gray-200 rounded-lg">
+                                    <option>亚光</option>
+                                    <option>光面</option>
+                                    <option>纹理</option>
+                                    <option>拉丝</option>
+                                    <option>阳极氧化</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="block text-sm font-medium mb-1">颜色</label>
+                                <div class="flex space-x-2">
+                                    <div class="w-8 h-8 rounded-full bg-gray-800 cursor-pointer border-2 border-white"></div>
+                                    <div class="w-8 h-8 rounded-full bg-white cursor-pointer border-2 border-gray-300"></div>
+                                    <div class="w-8 h-8 rounded-full bg-blue-500 cursor-pointer border-2 border-white"></div>
+                                    <div class="w-8 h-8 rounded-full bg-green-500 cursor-pointer border-2 border-white"></div>
+                                    <div class="w-8 h-8 rounded-full bg-red-500 cursor-pointer border-2 border-white"></div>
+                                    <div class="w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 cursor-pointer border-2 border-white"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- DFM System -->
+                <div class="dfm-system mb-6">
+                    <h2 class="text-xl font-semibold mb-4">智能DFM提示系统</h2>
+                    <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mb-4">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-exclamation-triangle text-yellow-500"></i>
+                            </div>
+                            <div class="ml-3">
+                                <h3 class="text-sm font-medium text-yellow-800">壁厚警告</h3>
+                                <div class="text-sm text-yellow-700">
+                                    <p>检测到模型部分区域壁厚小于1.5mm，可能导致结构强度不足。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-green-50 border-l-4 border-green-500 p-4 mb-4">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-check-circle text-green-500"></i>
+                            </div>
+                            <div class="ml-3">
+                                <h3 class="text-sm font-medium text-green-800">退模角合规</h3>
+                                <div class="text-sm text-green-700">
+                                    <p>所有表面退模角大于1°，符合注塑成型要求。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-info-circle text-blue-500"></i>
+                            </div>
+                            <div class="ml-3">
+                                <h3 class="text-sm font-medium text-blue-800">优化建议</h3>
+                                <div class="text-sm text-blue-700">
+                                    <p>考虑添加肋条增强产品底部强度，并优化连接件布局减少装配复杂度。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Production Progress Board -->
+        <div class="progress-board">
+            <h2 class="text-xl font-semibold mb-4">生产进度看板</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="progress-item">
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 class="font-medium">3D打印原型</h3>
+                        <span class="text-sm font-semibold text-green-600">90%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 90%"></div>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-2">预计完成: 2025-06-18</p>
+                </div>
+                
+                <div class="progress-item">
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 class="font-medium">模具开发</h3>
+                        <span class="text-sm font-semibold text-blue-600">45%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 45%"></div>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-2">预计完成: 2025-07-10</p>
+                </div>
+                
+                <div class="progress-item">
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 class="font-medium">材料采购</h3>
+                        <span class="text-sm font-semibold text-purple-600">60%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill bg-purple-500" style="width: 60%"></div>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-2">预计完成: 2025-06-25</p>
+                </div>
+                
+                <div class="progress-item">
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 class="font-medium">装配测试</h3>
+                        <span class="text-sm font-semibold text-gray-600">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill bg-gray-500" style="width: 0%"></div>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-2">预计完成: 2025-07-30</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Creator Store -->
+        <div class="creator-store">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-semibold">创作者商店</h2>
+                <a href="#" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+                    <span>查看全部</span>
+                    <i class="fas fa-chevron-right ml-1 text-sm"></i>
+                </a>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div class="store-item bg-white shadow">
+                    <div class="h-40 bg-gray-100 flex items-center justify-center">
+                        <i class="fas fa-lamp text-4xl text-gray-400"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-medium">智能台灯设计</h3>
+                        <div class="flex items-center mt-2">
+                            <img src="https://cdn.jsdelivr.net/gh/imag2046/cdn-assets/img/placeholder-avatar.png" alt="Avatar" class="w-6 h-6 rounded-full">
+                            <span class="text-sm text-gray-600 ml-2">设计师: 陈明</span>
+                        </div>
+                        <div class="flex justify-between items-center mt-3">
+                            <span class="font-semibold text-blue-600">¥129.00</span>
+                            <button class="px-3 py-1 rounded bg-blue-100 text-blue-600 hover:bg-blue-200 text-sm">
+                                <i class="fas fa-cart-plus mr-1"></i> 加入
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="store-item bg-white shadow">
+                    <div class="h-40 bg-gray-100 flex items-center justify-center">
+                        <i class="fas fa-coffee text-4xl text-gray-400"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-medium">便携咖啡杯组件</h3>
+                        <div class="flex items-center mt-2">
+                            <img src="https://cdn.jsdelivr.net/gh/imag2046/cdn-assets/img/placeholder-avatar.png" alt="Avatar" class="w-6 h-6 rounded-full">
+                            <span class="text-sm text-gray-600 ml-2">设计师: 张文</span>
+                        </div>
+                        <div class="flex justify-between items-center mt-3">
+                            <span class="font-semibold text-blue-600">¥89.00</span>
+                            <button class="px-3 py-1 rounded bg-blue-100 text-blue-600 hover:bg-blue-200 text-sm">
+                                <i class="fas fa-cart-plus mr-1"></i> 加入
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="store-item bg-white shadow">
+                    <div class="h-40 bg-gray-100 flex items-center justify-center">
+                        <i class="fas fa-headphones text-4xl text-gray-400"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-medium">耳机支架设计</h3>
+                        <div class="flex items-center mt-2">
+                            <img src="https://cdn.jsdelivr.net/gh/imag2046/cdn-assets/img/placeholder-avatar.png" alt="Avatar" class="w-6 h-6 rounded-full">
+                            <span class="text-sm text-gray-600 ml-2">设计师: 李想</span>
+                        </div>
+                        <div class="flex justify-between items-center mt-3">
+                            <span class="font-semibold text-blue-600">¥69.00</span>
+                            <button class="px-3 py-1 rounded bg-blue-100 text-blue-600 hover:bg-blue-200 text-sm">
+                                <i class="fas fa-cart-plus mr-1"></i> 加入
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="store-item bg-white shadow">
+                    <div class="h-40 bg-gray-100 flex items-center justify-center">
+                        <i class="fas fa-mobile-alt text-4xl text-gray-400"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-medium">智能手机支架</h3>
+                        <div class="flex items-center mt-2">
+                            <img src="https://cdn.jsdelivr.net/gh/imag2046/cdn-assets/img/placeholder-avatar.png" alt="Avatar" class="w-6 h-6 rounded-full">
+                            <span class="text-sm text-gray-600 ml-2">设计师: 王佳</span>
+                        </div>
+                        <div class="flex justify-between items-center mt-3">
+                            <span class="font-semibold text-blue-600">¥49.00</span>
+                            <button class="px-3 py-1 rounded bg-blue-100 text-blue-600 hover:bg-blue-200 text-sm">
+                                <i class="fas fa-cart-plus mr-1"></i> 加入
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <footer class="mt-12 text-center text-gray-500 text-sm">
+            <p>© 2025 NYG三生万物创意平台 - 将创意转化为现实</p>
+            <div class="flex justify-center mt-2 space-x-4">
+                <a href="#" class="hover:text-gray-700">使用条款</a>
+                <a href="#" class="hover:text-gray-700">隐私政策</a>
+                <a href="#" class="hover:text-gray-700">联系我们</a>
+                <a href="#" class="hover:text-gray-700">帮助中心</a>
+            </div>
+        </footer>
+    </div>
+    
+    <script>
+        // Tab switching functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons and contents
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    button.classList.add('active');
+                    
+                    // Show corresponding content
+                    const tabId = button.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Simulate chat interaction
+            const chatInput = document.querySelector('.chat-input input');
+            const chatSendButton = document.querySelector('.chat-input button');
+            const chatMessages = document.querySelector('.chat-messages');
+            
+            function sendMessage() {
+                const message = chatInput.value.trim();
+                if (message) {
+                    // Add user message
+                    const userMessageHTML = `
+                        <div class="message user-message">
+                            <div class="font-semibold mb-1">您</div>
+                            <p>${message}</p>
+                        </div>
+                    `;
+                    chatMessages.insertAdjacentHTML('beforeend', userMessageHTML);
+                    
+                    // Clear input
+                    chatInput.value = '';
+                    
+                    // Scroll to bottom
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                    
+                    // Simulate response (in real app, this would be an API call)
+                    setTimeout(() => {
+                        const responseHTML = `
+                            <div class="message system-message">
+                                <div class="font-semibold mb-1">NYG创意助手</div>
+                                <p>感谢您的输入！我正在分析您的需求，并将为您提供相关设计建议。</p>
+                            </div>
+                        `;
+                        chatMessages.insertAdjacentHTML('beforeend', responseHTML);
+                        
+                        // Scroll to bottom again
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                    }, 1000);
+                }
+            }
+            
+            chatSendButton.addEventListener('click', sendMessage);
+            chatInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
