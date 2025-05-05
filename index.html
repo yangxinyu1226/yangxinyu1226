@@ -3,740 +3,478 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>小商品商城</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
-    <style>
-        body {
-            font-family: 'Helvetica', 'Arial', sans-serif;
-        }
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        .product-card {
-            transition: all 0.3s ease;
-        }
-        .carousel {
-            position: relative;
-            overflow: hidden;
-        }
-        .carousel-inner {
-            display: flex;
-            transition: transform 0.5s ease;
-        }
-        .carousel-item {
-            min-width: 100%;
-        }
-        .category-menu {
-            max-height: calc(100vh - 100px);
-            overflow-y: auto;
-        }
-        .star-rating .fa-star.checked {
-            color: #FFD700;
-        }
-        .price-tag {
-            background-color: #ff4d4d;
-            color: white;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-weight: bold;
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-        .discount-badge {
-            background-color: #ff4d4d;
-            color: white;
-            font-size: 0.8rem;
-            padding: 1px 6px;
-            border-radius: 8px;
-            margin-left: 5px;
-        }
-        .sale-badge {
-            position: absolute;
-            top: 0;
-            left: 0;
-            background-color: #ff4d4d;
-            color: white;
-            padding: 3px 8px;
-            font-size: 0.7rem;
-            border-top-left-radius: 5px;
-        }
-        .new-badge {
-            position: absolute;
-            top: 0;
-            left: 0;
-            background-color: #4d79ff;
-            color: white;
-            padding: 3px 8px;
-            font-size: 0.7rem;
-            border-top-left-radius: 5px;
-        }
-        @media print {
-            .category-menu {
-                max-height: none;
-                overflow-y: visible;
-            }
-        }
-    </style>
+    <title>NYG 三生万物 | AI 创意平台</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Add icon library if needed, e.g., Font Awesome -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> -->
 </head>
-<body class="bg-gray-100">
-    <!-- 顶部导航栏 -->
-    <header class="bg-white shadow-md sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-2">
-            <div class="flex items-center justify-between">
-                <!-- Logo -->
-                <div class="flex items-center space-x-2">
-                    <div class="text-red-500 text-2xl font-bold">
-                        <i class="fas fa-shopping-bag mr-2"></i>小商品商城
-                    </div>
-                </div>
-                
-                <!-- 搜索框 -->
-                <div class="hidden md:flex flex-1 max-w-md mx-4">
-                    <div class="relative w-full">
-                        <input type="text" placeholder="搜索商品..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
-                        <button class="absolute right-0 top-0 h-full px-4 text-white bg-red-500 rounded-r-lg">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- 用户中心和购物车 -->
-                <div class="flex items-center space-x-4">
-                    <a href="#" class="relative text-gray-700 hover:text-red-500">
-                        <i class="fas fa-heart text-xl"></i>
-                        <span class="absolute -top-2 -right-2 w-5 h-5 bg-red-500 rounded-full text-white text-xs flex items-center justify-center">8</span>
-                    </a>
-                    <a href="#" class="relative text-gray-700 hover:text-red-500">
-                        <i class="fas fa-shopping-cart text-xl"></i>
-                        <span class="absolute -top-2 -right-2 w-5 h-5 bg-red-500 rounded-full text-white text-xs flex items-center justify-center">3</span>
-                    </a>
-                    <a href="#" class="text-gray-700 hover:text-red-500">
-                        <i class="fas fa-user text-xl"></i>
-                    </a>
-                </div>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="#homepage">NYG 三生万物</a>
             </div>
-            
-            <!-- 移动端搜索框 -->
-            <div class="mt-2 md:hidden">
-                <div class="relative">
-                    <input type="text" placeholder="搜索商品..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
-                    <button class="absolute right-0 top-0 h-full px-4 text-white bg-red-500 rounded-r-lg">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
+            <ul class="nav-links">
+                <li><a href="#homepage" class="nav-link active">首页</a></li>
+                <li><a href="#creation-studio" class="nav-link">创意工作台</a></li>
+                <li><a href="#dashboard" class="nav-link">我的项目</a></li>
+                <li><a href="#showcase" class="nav-link">创意展示</a></li>
+                <li><a href="#learn-support" class="nav-link">学习与支持</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="btn btn-secondary">登录</button>
+                <button class="btn btn-primary">注册</button>
             </div>
-        </div>
+            <button class="mobile-menu-toggle">☰</button>
+        </nav>
     </header>
 
-    <main class="container mx-auto px-4 py-4">
-        <div class="flex flex-col md:flex-row gap-4">
-            <!-- 分类菜单（侧边栏） -->
-            <div class="w-full md:w-1/5 bg-white rounded-lg shadow-md p-4">
-                <h2 class="text-lg font-bold mb-4 text-gray-800">商品分类</h2>
-                <ul class="category-menu">
-                    <li class="mb-2">
-                        <a href="#" class="flex items-center text-gray-700 hover:text-red-500 p-2 hover:bg-red-50 rounded">
-                            <i class="fas fa-tshirt mr-2"></i>
-                            <span>服装鞋帽</span>
-                        </a>
-                    </li>
-                    <li class="mb-2">
-                        <a href="#" class="flex items-center text-gray-700 hover:text-red-500 p-2 hover:bg-red-50 rounded">
-                            <i class="fas fa-mobile-alt mr-2"></i>
-                            <span>手机数码</span>
-                        </a>
-                    </li>
-                    <li class="mb-2">
-                        <a href="#" class="flex items-center text-gray-700 hover:text-red-500 p-2 hover:bg-red-50 rounded">
-                            <i class="fas fa-laptop mr-2"></i>
-                            <span>电脑办公</span>
-                        </a>
-                    </li>
-                    <li class="mb-2">
-                        <a href="#" class="flex items-center text-gray-700 hover:text-red-500 p-2 hover:bg-red-50 rounded">
-                            <i class="fas fa-home mr-2"></i>
-                            <span>家居家装</span>
-                        </a>
-                    </li>
-                    <li class="mb-2">
-                        <a href="#" class="flex items-center text-gray-700 hover:text-red-500 p-2 hover:bg-red-50 rounded">
-                            <i class="fas fa-utensils mr-2"></i>
-                            <span>食品生鲜</span>
-                        </a>
-                    </li>
-                    <li class="mb-2">
-                        <a href="#" class="flex items-center text-gray-700 hover:text-red-500 p-2 hover:bg-red-50 rounded">
-                            <i class="fas fa-spa mr-2"></i>
-                            <span>美妆护肤</span>
-                        </a>
-                    </li>
-                    <li class="mb-2">
-                        <a href="#" class="flex items-center text-gray-700 hover:text-red-500 p-2 hover:bg-red-50 rounded">
-                            <i class="fas fa-baby mr-2"></i>
-                            <span>母婴用品</span>
-                        </a>
-                    </li>
-                    <li class="mb-2">
-                        <a href="#" class="flex items-center text-gray-700 hover:text-red-500 p-2 hover:bg-red-50 rounded">
-                            <i class="fas fa-heartbeat mr-2"></i>
-                            <span>运动健康</span>
-                        </a>
-                    </li>
-                    <li class="mb-2">
-                        <a href="#" class="flex items-center text-gray-700 hover:text-red-500 p-2 hover:bg-red-50 rounded">
-                            <i class="fas fa-book mr-2"></i>
-                            <span>图书文娱</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="flex items-center text-gray-700 hover:text-red-500 p-2 hover:bg-red-50 rounded">
-                            <i class="fas fa-gift mr-2"></i>
-                            <span>礼品鲜花</span>
-                        </a>
-                    </li>
-                </ul>
+    <main>
+        <!-- ========= Homepage Section ========= -->
+        <section id="homepage" class="page-section active">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <h1>NYG 三生万物</h1>
+                    <p class="slogan">一句话，创造你的专属实物</p>
+                    <div class="hero-input-group">
+                        <input type="text" id="creative-input-hero" placeholder="在此输入你的创意描述...">
+                        <button id="start-creating-hero" class="btn btn-accent">开始创造!</button>
+                    </div>
+                    <div class="hero-highlights">
+                        <span><i class="icon-ai"></i> Gemini+GPT-4o 驱动</span>
+                        <span><i class="icon-3d"></i> AI 生成 3D 模型</span>
+                        <span><i class="icon-dfm"></i> 智能 DFM 护航</span>
+                        <span><i class="icon-factory"></i> 微工厂极速制造</span>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <!-- Placeholder for dynamic WebGL animation or AI art -->
+                    <div class="visual-placeholder"></div>
+                </div>
             </div>
 
-            <!-- 主要内容区域 -->
-            <div class="w-full md:w-4/5">
-                <!-- 轮播广告图 -->
-                <div class="carousel rounded-lg overflow-hidden shadow-md mb-6">
-                    <div class="carousel-inner">
-                        <div class="carousel-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devrielaraujo/images/ecommerce/banner1.jpg" alt="促销活动" class="w-full h-48 object-cover">
-                        </div>
+            <div class="how-it-works section-padding">
+                <h2>运作流程</h2>
+                <div class="steps-container">
+                    <div class="step">
+                        <div class="step-icon">💡</div>
+                        <h3>1. 输入灵感</h3>
+                        <p>用自然语言描述你的创意。</p>
                     </div>
-                    <button class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-r-md opacity-75 hover:opacity-100">
-                        <i class="fas fa-chevron-left text-gray-800"></i>
-                    </button>
-                    <button class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-l-md opacity-75 hover:opacity-100">
-                        <i class="fas fa-chevron-right text-gray-800"></i>
-                    </button>
+                    <div class="step">
+                        <div class="step-icon">🧠</div>
+                        <h3>2. AI 设计</h3>
+                        <p>多模型 AI 理解并生成概念。</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">🧊</div>
+                        <h3>3. 3D 建模</h3>
+                        <p>将概念转化为 3D 模型文件。</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">🛡️</div>
+                        <h3>4. DFM 优化</h3>
+                        <p>智能分析确保可制造性。</p>
+                    </div>
+                     <div class="step">
+                        <div class="step-icon">🏭</div>
+                        <h3>5. 智能生产</h3>
+                        <p>分布式微工厂快速制造。</p>
+                    </div>
+                     <div class="step">
+                        <div class="step-icon">🎁</div>
+                        <h3>6. 收到实物</h3>
+                        <p>创意变为现实，送到你手。</p>
+                    </div>
                 </div>
+            </div>
 
-                <!-- 热销商品区域 -->
-                <div class="mb-6">
-                    <div class="flex items-center justify-between mb-4">
-                        <h2 class="text-xl font-bold text-gray-800">
-                            <i class="fas fa-fire text-red-500 mr-2"></i>热销商品
-                        </h2>
-                        <a href="#" class="text-red-500 hover:text-red-700 text-sm">查看更多 <i class="fas fa-chevron-right text-xs"></i></a>
+            <div class="featured-creations section-padding">
+                <h2>精选创意展示</h2>
+                <div class="gallery-grid">
+                    <!-- Placeholder cards - replace with dynamic content -->
+                    <div class="creation-card">
+                        <img src="placeholder-creation-1.jpg" alt="创意作品 1">
+                        <div class="card-info">
+                            <h4>赛博朋克风格夜灯</h4>
+                            <p>由 用户A 分享</p>
+                        </div>
                     </div>
-                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                        <!-- 热销商品卡片1 -->
-                        <div class="product-card bg-white rounded-lg shadow-md overflow-hidden relative">
-                            <span class="sale-badge">热销</span>
-                            <img src="https://cdn.jsdelivr.net/gh/devrielaraujo/images/ecommerce/product1.jpg" alt="产品图片" class="w-full h-40 object-cover">
-                            <div class="p-3">
-                                <h3 class="text-sm font-medium text-gray-800 truncate">无线蓝牙耳机 降噪高音质</h3>
-                                <div class="flex items-center mt-1">
-                                    <div class="star-rating">
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star-half-alt checked text-xs"></i>
-                                    </div>
-                                    <span class="text-xs text-gray-500 ml-1">(384)</span>
-                                </div>
-                                <div class="flex items-center justify-between mt-2">
-                                    <div class="text-red-500 font-bold">¥129<span class="text-xs text-gray-500 line-through ml-1">¥199</span></div>
-                                    <button class="text-white bg-red-500 rounded-full w-7 h-7 flex items-center justify-center hover:bg-red-600">
-                                        <i class="fas fa-shopping-cart text-xs"></i>
-                                    </button>
-                                </div>
-                            </div>
+                    <div class="creation-card">
+                        <img src="placeholder-creation-2.jpg" alt="创意作品 2">
+                        <div class="card-info">
+                            <h4>流体艺术花瓶</h4>
+                             <p>由 用户B 分享</p>
                         </div>
-                        
-                        <!-- 热销商品卡片2 -->
-                        <div class="product-card bg-white rounded-lg shadow-md overflow-hidden relative">
-                            <span class="sale-badge">热销</span>
-                            <img src="https://cdn.jsdelivr.net/gh/devrielaraujo/images/ecommerce/product2.jpg" alt="产品图片" class="w-full h-40 object-cover">
-                            <div class="p-3">
-                                <h3 class="text-sm font-medium text-gray-800 truncate">智能手表 多功能运动监测</h3>
-                                <div class="flex items-center mt-1">
-                                    <div class="star-rating">
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star text-gray-300 text-xs"></i>
-                                    </div>
-                                    <span class="text-xs text-gray-500 ml-1">(256)</span>
-                                </div>
-                                <div class="flex items-center justify-between mt-2">
-                                    <div class="text-red-500 font-bold">¥199<span class="text-xs text-gray-500 line-through ml-1">¥299</span></div>
-                                    <button class="text-white bg-red-500 rounded-full w-7 h-7 flex items-center justify-center hover:bg-red-600">
-                                        <i class="fas fa-shopping-cart text-xs"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- 热销商品卡片3 -->
-                        <div class="product-card bg-white rounded-lg shadow-md overflow-hidden relative">
-                            <span class="sale-badge">热销</span>
-                            <img src="https://cdn.jsdelivr.net/gh/devrielaraujo/images/ecommerce/product3.jpg" alt="产品图片" class="w-full h-40 object-cover">
-                            <div class="p-3">
-                                <h3 class="text-sm font-medium text-gray-800 truncate">便携式移动电源 20000mAh大容量</h3>
-                                <div class="flex items-center mt-1">
-                                    <div class="star-rating">
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                    </div>
-                                    <span class="text-xs text-gray-500 ml-1">(512)</span>
-                                </div>
-                                <div class="flex items-center justify-between mt-2">
-                                    <div class="text-red-500 font-bold">¥99<span class="text-xs text-gray-500 line-through ml-1">¥149</span></div>
-                                    <button class="text-white bg-red-500 rounded-full w-7 h-7 flex items-center justify-center hover:bg-red-600">
-                                        <i class="fas fa-shopping-cart text-xs"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- 热销商品卡片4 -->
-                        <div class="product-card bg-white rounded-lg shadow-md overflow-hidden relative">
-                            <span class="sale-badge">热销</span>
-                            <img src="https://cdn.jsdelivr.net/gh/devrielaraujo/images/ecommerce/product4.jpg" alt="产品图片" class="w-full h-40 object-cover">
-                            <div class="p-3">
-                                <h3 class="text-sm font-medium text-gray-800 truncate">超薄笔记本电脑 14英寸全面屏</h3>
-                                <div class="flex items-center mt-1">
-                                    <div class="star-rating">
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star-half-alt checked text-xs"></i>
-                                    </div>
-                                    <span class="text-xs text-gray-500 ml-1">(428)</span>
-                                </div>
-                                <div class="flex items-center justify-between mt-2">
-                                    <div class="text-red-500 font-bold">¥4299<span class="text-xs text-gray-500 line-through ml-1">¥4999</span></div>
-                                    <button class="text-white bg-red-500 rounded-full w-7 h-7 flex items-center justify-center hover:bg-red-600">
-                                        <i class="fas fa-shopping-cart text-xs"></i>
-                                    </button>
-                                </div>
-                            </div>
+                    </div>
+                    <div class="creation-card">
+                        <img src="placeholder-creation-3.jpg" alt="创意作品 3">
+                        <div class="card-info">
+                            <h4>定制化机械零件</h4>
+                             <p>由 企业C 分享</p>
                         </div>
                     </div>
                 </div>
+                <div style="text-align: center; margin-top: 30px;">
+                     <a href="#showcase" class="btn btn-secondary nav-link-js">查看更多</a>
+                </div>
+            </div>
 
-                <!-- 新品推荐区域 -->
-                <div class="mb-6">
-                    <div class="flex items-center justify-between mb-4">
-                        <h2 class="text-xl font-bold text-gray-800">
-                            <i class="fas fa-star text-blue-500 mr-2"></i>新品推荐
-                        </h2>
-                        <a href="#" class="text-red-500 hover:text-red-700 text-sm">查看更多 <i class="fas fa-chevron-right text-xs"></i></a>
+             <div class="tech-highlights section-padding">
+                <h2>技术亮点</h2>
+                <div class="tech-grid">
+                    <div class="tech-item">
+                        <div class="tech-icon">🚀</div>
+                        <h3>多模型融合 AI</h3>
+                        <p>结合 Gemini 与 GPT-4o 的强大理解与创造力。</p>
                     </div>
-                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                        <!-- 新品推荐卡片1 -->
-                        <div class="product-card bg-white rounded-lg shadow-md overflow-hidden relative">
-                            <span class="new-badge">新品</span>
-                            <img src="https://cdn.jsdelivr.net/gh/devrielaraujo/images/ecommerce/product5.jpg" alt="产品图片" class="w-full h-40 object-cover">
-                            <div class="p-3">
-                                <h3 class="text-sm font-medium text-gray-800 truncate">智能音箱 AI语音助手</h3>
-                                <div class="flex items-center mt-1">
-                                    <div class="star-rating">
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star text-gray-300 text-xs"></i>
-                                    </div>
-                                    <span class="text-xs text-gray-500 ml-1">(142)</span>
-                                </div>
-                                <div class="flex items-center justify-between mt-2">
-                                    <div class="text-red-500 font-bold">¥249<span class="text-xs text-gray-500 line-through ml-1">¥299</span></div>
-                                    <button class="text-white bg-red-500 rounded-full w-7 h-7 flex items-center justify-center hover:bg-red-600">
-                                        <i class="fas fa-shopping-cart text-xs"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- 新品推荐卡片2 -->
-                        <div class="product-card bg-white rounded-lg shadow-md overflow-hidden relative">
-                            <span class="new-badge">新品</span>
-                            <img src="https://cdn.jsdelivr.net/gh/devrielaraujo/images/ecommerce/product6.jpg" alt="产品图片" class="w-full h-40 object-cover">
-                            <div class="p-3">
-                                <h3 class="text-sm font-medium text-gray-800 truncate">无线充电器 快充版</h3>
-                                <div class="flex items-center mt-1">
-                                    <div class="star-rating">
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star-half-alt checked text-xs"></i>
-                                        <i class="fas fa-star text-gray-300 text-xs"></i>
-                                    </div>
-                                    <span class="text-xs text-gray-500 ml-1">(89)</span>
-                                </div>
-                                <div class="flex items-center justify-between mt-2">
-                                    <div class="text-red-500 font-bold">¥89<span class="text-xs text-gray-500 line-through ml-1">¥119</span></div>
-                                    <button class="text-white bg-red-500 rounded-full w-7 h-7 flex items-center justify-center hover:bg-red-600">
-                                        <i class="fas fa-shopping-cart text-xs"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- 新品推荐卡片3 -->
-                        <div class="product-card bg-white rounded-lg shadow-md overflow-hidden relative">
-                            <span class="new-badge">新品</span>
-                            <img src="https://cdn.jsdelivr.net/gh/devrielaraujo/images/ecommerce/product7.jpg" alt="产品图片" class="w-full h-40 object-cover">
-                            <div class="p-3">
-                                <h3 class="text-sm font-medium text-gray-800 truncate">智能摄像头 高清夜视</h3>
-                                <div class="flex items-center mt-1">
-                                    <div class="star-rating">
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star text-gray-300 text-xs"></i>
-                                    </div>
-                                    <span class="text-xs text-gray-500 ml-1">(67)</span>
-                                </div>
-                                <div class="flex items-center justify-between mt-2">
-                                    <div class="text-red-500 font-bold">¥159<span class="text-xs text-gray-500 line-through ml-1">¥199</span></div>
-                                    <button class="text-white bg-red-500 rounded-full w-7 h-7 flex items-center justify-center hover:bg-red-600">
-                                        <i class="fas fa-shopping-cart text-xs"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- 新品推荐卡片4 -->
-                        <div class="product-card bg-white rounded-lg shadow-md overflow-hidden relative">
-                            <span class="new-badge">新品</span>
-                            <img src="https://cdn.jsdelivr.net/gh/devrielaraujo/images/ecommerce/product8.jpg" alt="产品图片" class="w-full h-40 object-cover">
-                            <div class="p-3">
-                                <h3 class="text-sm font-medium text-gray-800 truncate">机械键盘 RGB背光游戏键盘</h3>
-                                <div class="flex items-center mt-1">
-                                    <div class="star-rating">
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                    </div>
-                                    <span class="text-xs text-gray-500 ml-1">(122)</span>
-                                </div>
-                                <div class="flex items-center justify-between mt-2">
-                                    <div class="text-red-500 font-bold">¥239<span class="text-xs text-gray-500 line-through ml-1">¥299</span></div>
-                                    <button class="text-white bg-red-500 rounded-full w-7 h-7 flex items-center justify-center hover:bg-red-600">
-                                        <i class="fas fa-shopping-cart text-xs"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                     <div class="tech-item">
+                        <div class="tech-icon">✨</div>
+                        <h3>专业 3D 生成</h3>
+                        <p>利用先进 AI 技术生成高质量可制造 3D 模型。</p>
+                    </div>
+                     <div class="tech-item">
+                        <div class="tech-icon">⚙️</div>
+                        <h3>智能 DFM</h3>
+                        <p>自动化设计分析，降低生产风险，优化成本。</p>
+                    </div>
+                     <div class="tech-item">
+                        <div class="tech-icon">🌐</div>
+                        <h3>分布式制造</h3>
+                        <p>连接微工厂网络，实现快速、本地化柔性生产。</p>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <!-- 商品展示区域 -->
-                <div class="mb-6">
-                    <div class="flex items-center justify-between mb-4">
-                        <h2 class="text-xl font-bold text-gray-800">
-                            <i class="fas fa-thumbs-up text-green-500 mr-2"></i>猜你喜欢
-                        </h2>
-                        <a href="#" class="text-red-500 hover:text-red-700 text-sm">查看更多 <i class="fas fa-chevron-right text-xs"></i></a>
+        <!-- ========= Creation Studio Section ========= -->
+        <section id="creation-studio" class="page-section">
+            <div class="studio-container section-padding">
+                <h2>创意工作台</h2>
+                <div class="studio-layout">
+                    <!-- Left Panel: Input & Controls -->
+                    <div class="studio-controls">
+                        <div class="control-step active" id="step-input">
+                            <h3>1. 描述你的创意</h3>
+                            <textarea id="creative-input-studio" rows="4" placeholder="例如：一个带有猫咪耳朵的耳机支架，简约风格..."></textarea>
+                            <div class="advanced-options">
+                                <button class="toggle-advanced">高级选项 ▼</button>
+                                <div class="options-content" style="display: none;">
+                                    <label for="style-slider">风格:</label>
+                                    <span>写实</span> <input type="range" id="style-slider" min="0" max="100"> <span>卡通</span>
+                                    <label for="material-hint">材质倾向:</label>
+                                    <input type="text" id="material-hint" placeholder="如：木质、金属、透明">
+                                    <!-- More options here -->
+                                </div>
+                            </div>
+                             <button class="btn btn-primary btn-next-step">生成概念</button>
+                        </div>
+
+                        <div class="control-step" id="step-refine">
+                             <h3>2. 优化与调整</h3>
+                             <p>AI 生成的初步模型请在预览区查看。</p>
+                             <textarea id="refine-input" rows="2" placeholder="输入微调指令，如：让它再高一点..."></textarea>
+                             <button class="btn btn-secondary">应用调整</button>
+                             <button class="btn btn-primary btn-next-step">生产可行性分析</button>
+                             <button class="btn btn-back">返回上一步</button>
+                        </div>
+
+                        <div class="control-step" id="step-dfm">
+                             <h3>3. DFM 分析结果</h3>
+                             <div id="dfm-results">
+                                 <!-- DFM results will be populated here by JS -->
+                                 <p>正在分析... (模拟)</p>
+                                 <!-- Example: <p class="dfm-issue-error">错误：发现无法打印的薄壁结构。</p> -->
+                                 <!-- Example: <p class="dfm-issue-warning">警告：存在需要强力支撑的悬空。</p> -->
+                                 <!-- Example: <p class="dfm-ok">✅ 分析通过！设计可制造性良好。</p> -->
+                             </div>
+                             <button class="btn btn-secondary" id="dfm-fix-suggestion" style="display:none;">尝试自动修复</button>
+                             <button class="btn btn-primary btn-next-step" disabled>选择材质与工艺</button>
+                             <button class="btn btn-back">返回修改模型</button>
+                        </div>
+
+                         <div class="control-step" id="step-material">
+                             <h3>4. 选择材质与工艺</h3>
+                             <div class="material-selector">
+                                 <!-- Material options populated by JS or static -->
+                                 <div class="material-option" data-price="15">PLA (多种颜色)</div>
+                                 <div class="material-option" data-price="25">ABS (耐用)</div>
+                                 <div class="material-option" data-price="40">树脂 (高精度)</div>
+                             </div>
+                             <div class="process-selector">
+                                 <label><input type="checkbox" name="process" value="sanding"> 打磨 (+¥5)</label>
+                                 <label><input type="checkbox" name="process" value="painting"> 喷漆 (+¥15)</label>
+                             </div>
+                             <div class="quote">
+                                 预估价格: <span id="estimated-price">¥--</span>
+                             </div>
+                             <button class="btn btn-accent btn-next-step">下单生产</button>
+                             <button class="btn btn-back">返回 DFM</button>
+                        </div>
+                        <div class="control-step" id="step-order">
+                             <h3>5. 确认订单</h3>
+                             <p>请检查您的设计、选项和地址信息。</p>
+                             <!-- Order summary here -->
+                             <button class="btn btn-success">确认支付</button>
+                             <button class="btn btn-back">返回修改材质</button>
+                        </div>
+
                     </div>
-                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                        <!-- 商品卡片1 -->
-                        <div class="product-card bg-white rounded-lg shadow-md overflow-hidden relative">
-                            <img src="https://cdn.jsdelivr.net/gh/devrielaraujo/images/ecommerce/product9.jpg" alt="产品图片" class="w-full h-40 object-cover">
-                            <div class="p-3">
-                                <h3 class="text-sm font-medium text-gray-800 truncate">时尚休闲鞋 轻便透气</h3>
-                                <div class="flex items-center mt-1">
-                                    <div class="star-rating">
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star text-gray-300 text-xs"></i>
-                                    </div>
-                                    <span class="text-xs text-gray-500 ml-1">(198)</span>
-                                </div>
-                                <div class="flex items-center justify-between mt-2">
-                                    <div class="text-red-500 font-bold">¥179<span class="text-xs text-gray-500 line-through ml-1">¥229</span></div>
-                                    <button class="text-white bg-red-500 rounded-full w-7 h-7 flex items-center justify-center hover:bg-red-600">
-                                        <i class="fas fa-shopping-cart text-xs"></i>
-                                    </button>
-                                </div>
+
+                    <!-- Right Panel: 3D Preview -->
+                    <div class="studio-preview">
+                        <div id="preview-3d" class="preview-placeholder">
+                            <p>3D 模型预览区域</p>
+                            <!-- Placeholder for Three.js/Babylon.js canvas -->
+                             <div id="dfm-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;">
+                                <!-- DFM issues visualization placeholder -->
                             </div>
                         </div>
-                        
-                        <!-- 商品卡片2 -->
-                        <div class="product-card bg-white rounded-lg shadow-md overflow-hidden relative">
-                            <img src="https://cdn.jsdelivr.net/gh/devrielaraujo/images/ecommerce/product10.jpg" alt="产品图片" class="w-full h-40 object-cover">
-                            <div class="p-3">
-                                <h3 class="text-sm font-medium text-gray-800 truncate">保温杯 316不锈钢材质</h3>
-                                <div class="flex items-center mt-1">
-                                    <div class="star-rating">
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star-half-alt checked text-xs"></i>
-                                    </div>
-                                    <span class="text-xs text-gray-500 ml-1">(254)</span>
-                                </div>
-                                <div class="flex items-center justify-between mt-2">
-                                    <div class="text-red-500 font-bold">¥59<span class="text-xs text-gray-500 line-through ml-1">¥79</span></div>
-                                    <button class="text-white bg-red-500 rounded-full w-7 h-7 flex items-center justify-center hover:bg-red-600">
-                                        <i class="fas fa-shopping-cart text-xs"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- 商品卡片3 -->
-                        <div class="product-card bg-white rounded-lg shadow-md overflow-hidden relative">
-                            <img src="https://cdn.jsdelivr.net/gh/devrielaraujo/images/ecommerce/product11.jpg" alt="产品图片" class="w-full h-40 object-cover">
-                            <div class="p-3">
-                                <h3 class="text-sm font-medium text-gray-800 truncate">便携式榨汁机 随身果汁杯</h3>
-                                <div class="flex items-center mt-1">
-                                    <div class="star-rating">
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star text-gray-300 text-xs"></i>
-                                        <i class="fas fa-star text-gray-300 text-xs"></i>
-                                    </div>
-                                    <span class="text-xs text-gray-500 ml-1">(76)</span>
-                                </div>
-                                <div class="flex items-center justify-between mt-2">
-                                    <div class="text-red-500 font-bold">¥79<span class="text-xs text-gray-500 line-through ml-1">¥99</span></div>
-                                    <button class="text-white bg-red-500 rounded-full w-7 h-7 flex items-center justify-center hover:bg-red-600">
-                                        <i class="fas fa-shopping-cart text-xs"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- 商品卡片4 -->
-                        <div class="product-card bg-white rounded-lg shadow-md overflow-hidden relative">
-                            <img src="https://cdn.jsdelivr.net/gh/devrielaraujo/images/ecommerce/product12.jpg" alt="产品图片" class="w-full h-40 object-cover">
-                            <div class="p-3">
-                                <h3 class="text-sm font-medium text-gray-800 truncate">小型台灯 学生护眼LED</h3>
-                                <div class="flex items-center mt-1">
-                                    <div class="star-rating">
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star text-gray-300 text-xs"></i>
-                                    </div>
-                                    <span class="text-xs text-gray-500 ml-1">(137)</span>
-                                </div>
-                                <div class="flex items-center justify-between mt-2">
-                                    <div class="text-red-500 font-bold">¥69<span class="text-xs text-gray-500 line-through ml-1">¥89</span></div>
-                                    <button class="text-white bg-red-500 rounded-full w-7 h-7 flex items-center justify-center hover:bg-red-600">
-                                        <i class="fas fa-shopping-cart text-xs"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- 商品卡片5 -->
-                        <div class="product-card bg-white rounded-lg shadow-md overflow-hidden relative">
-                            <img src="https://cdn.jsdelivr.net/gh/devrielaraujo/images/ecommerce/product13.jpg" alt="产品图片" class="w-full h-40 object-cover">
-                            <div class="p-3">
-                                <h3 class="text-sm font-medium text-gray-800 truncate">防滑瑜伽垫 加厚健身垫</h3>
-                                <div class="flex items-center mt-1">
-                                    <div class="star-rating">
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star-half-alt checked text-xs"></i>
-                                    </div>
-                                    <span class="text-xs text-gray-500 ml-1">(218)</span>
-                                </div>
-                                <div class="flex items-center justify-between mt-2">
-                                    <div class="text-red-500 font-bold">¥89<span class="text-xs text-gray-500 line-through ml-1">¥119</span></div>
-                                    <button class="text-white bg-red-500 rounded-full w-7 h-7 flex items-center justify-center hover:bg-red-600">
-                                        <i class="fas fa-shopping-cart text-xs"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- 商品卡片6 -->
-                        <div class="product-card bg-white rounded-lg shadow-md overflow-hidden relative">
-                            <img src="https://cdn.jsdelivr.net/gh/devrielaraujo/images/ecommerce/product14.jpg" alt="产品图片" class="w-full h-40 object-cover">
-                            <div class="p-3">
-                                <h3 class="text-sm font-medium text-gray-800 truncate">多功能背包 商务休闲双肩包</h3>
-                                <div class="flex items-center mt-1">
-                                    <div class="star-rating">
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                    </div>
-                                    <span class="text-xs text-gray-500 ml-1">(319)</span>
-                                </div>
-                                <div class="flex items-center justify-between mt-2">
-                                    <div class="text-red-500 font-bold">¥129<span class="text-xs text-gray-500 line-through ml-1">¥169</span></div>
-                                    <button class="text-white bg-red-500 rounded-full w-7 h-7 flex items-center justify-center hover:bg-red-600">
-                                        <i class="fas fa-shopping-cart text-xs"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- 商品卡片7 -->
-                        <div class="product-card bg-white rounded-lg shadow-md overflow-hidden relative">
-                            <img src="https://cdn.jsdelivr.net/gh/devrielaraujo/images/ecommerce/product15.jpg" alt="产品图片" class="w-full h-40 object-cover">
-                            <div class="p-3">
-                                <h3 class="text-sm font-medium text-gray-800 truncate">智能体脂秤 精准测量健康数据</h3>
-                                <div class="flex items-center mt-1">
-                                    <div class="star-rating">
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star text-gray-300 text-xs"></i>
-                                    </div>
-                                    <span class="text-xs text-gray-500 ml-1">(187)</span>
-                                </div>
-                                <div class="flex items-center justify-between mt-2">
-                                    <div class="text-red-500 font-bold">¥99<span class="text-xs text-gray-500 line-through ml-1">¥129</span></div>
-                                    <button class="text-white bg-red-500 rounded-full w-7 h-7 flex items-center justify-center hover:bg-red-600">
-                                        <i class="fas fa-shopping-cart text-xs"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- 商品卡片8 -->
-                        <div class="product-card bg-white rounded-lg shadow-md overflow-hidden relative">
-                            <img src="https://cdn.jsdelivr.net/gh/devrielaraujo/images/ecommerce/product16.jpg" alt="产品图片" class="w-full h-40 object-cover">
-                            <div class="p-3">
-                                <h3 class="text-sm font-medium text-gray-800 truncate">蓝牙音箱 便携式户外音响</h3>
-                                <div class="flex items-center mt-1">
-                                    <div class="star-rating">
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star checked text-xs"></i>
-                                        <i class="fas fa-star-half-alt checked text-xs"></i>
-                                        <i class="fas fa-star text-gray-300 text-xs"></i>
-                                    </div>
-                                    <span class="text-xs text-gray-500 ml-1">(162)</span>
-                                </div>
-                                <div class="flex items-center justify-between mt-2">
-                                    <div class="text-red-500 font-bold">¥149<span class="text-xs text-gray-500 line-through ml-1">¥199</span></div>
-                                    <button class="text-white bg-red-500 rounded-full w-7 h-7 flex items-center justify-center hover:bg-red-600">
-                                        <i class="fas fa-shopping-cart text-xs"></i>
-                                    </button>
-                                </div>
-                            </div>
+                        <div class="preview-controls">
+                            <button title="旋转"><i class="icon-rotate">🔄</i></button>
+                            <button title="缩放"><i class="icon-zoom">🔍</i></button>
+                            <button title="平移"><i class="icon-pan">🖐️</i></button>
+                            <button title="线框模式"><i class="icon-wireframe">🕸️</i></button>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
+
+        <!-- ========= Dashboard Section ========= -->
+        <section id="dashboard" class="page-section">
+            <div class="dashboard-container section-padding">
+                <h2>我的项目 / 仪表盘</h2>
+                <div class="dashboard-tabs">
+                    <button class="tab-link active" data-tab="projects">项目管理</button>
+                    <button class="tab-link" data-tab="kanban">生产进度</button>
+                    <button class="tab-link" data-tab="history">订单历史</button>
+                    <button class="tab-link" data-tab="settings">账户设置</button>
+                </div>
+
+                <div id="tab-projects" class="tab-content active">
+                    <h3>我的创意项目</h3>
+                    <div class="project-list">
+                        <!-- Project card example -->
+                        <div class="project-card">
+                            <img src="placeholder-project-1.jpg" alt="项目缩略图">
+                            <div class="project-info">
+                                <h4>猫耳耳机架</h4>
+                                <p>状态：<span class="status-draft">草稿</span></p>
+                                <p>创建日期：2024-05-20</p>
+                            </div>
+                            <div class="project-actions">
+                                <button class="btn btn-sm">编辑</button>
+                                <button class="btn btn-sm btn-danger">删除</button>
+                            </div>
+                        </div>
+                         <div class="project-card">
+                            <img src="placeholder-project-2.jpg" alt="项目缩略图">
+                            <div class="project-info">
+                                <h4>定制齿轮</h4>
+                                <p>状态：<span class="status-production">生产中</span></p>
+                                <p>创建日期：2024-05-18</p>
+                            </div>
+                            <div class="project-actions">
+                                <button class="btn btn-sm">查看进度</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tab-kanban" class="tab-content">
+                    <h3>生产进度看板</h3>
+                    <div class="kanban-board">
+                        <div class="kanban-column">
+                            <h4>订单确认</h4>
+                            <!-- Kanban card example -->
+                            <div class="kanban-card">
+                                <p>订单 #1003</p>
+                                <p>流体花瓶</p>
+                                <img src="placeholder-creation-2.jpg" class="kanban-thumb" alt="">
+                            </div>
+                        </div>
+                         <div class="kanban-column">
+                            <h4>DFM审核</h4>
+                        </div>
+                         <div class="kanban-column">
+                            <h4>分配工厂</h4>
+                             <div class="kanban-card">
+                                <p>订单 #1002</p>
+                                <p>定制齿轮</p>
+                                <img src="placeholder-project-2.jpg" class="kanban-thumb" alt="">
+                                <div class="progress-bar"><div style="width: 20%;"></div></div>
+                            </div>
+                        </div>
+                         <div class="kanban-column">
+                            <h4>生产中</h4>
+                        </div>
+                         <div class="kanban-column">
+                            <h4>后处理</h4>
+                        </div>
+                         <div class="kanban-column">
+                            <h4>已发货</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tab-history" class="tab-content">
+                    <h3>订单历史</h3>
+                    <table class="order-table">
+                        <thead>
+                            <tr>
+                                <th>订单号</th>
+                                <th>项目名称</th>
+                                <th>下单日期</th>
+                                <th>金额</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#1001</td>
+                                <td>赛博朋克夜灯</td>
+                                <td>2024-05-15</td>
+                                <td>¥128.00</td>
+                                <td><span class="status-completed">已完成</span></td>
+                                <td><button class="btn btn-sm">详情</button></td>
+                            </tr>
+                             <!-- More orders -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="tab-settings" class="tab-content">
+                    <h3>账户设置</h3>
+                     <form class="settings-form">
+                         <label for="profile-name">昵称:</label>
+                         <input type="text" id="profile-name" value="创意家">
+                         <label for="profile-email">邮箱:</label>
+                         <input type="email" id="profile-email" value="user@example.com" disabled>
+                         <button class="btn btn-primary">保存更改</button>
+                         <hr>
+                         <h4>收货地址</h4>
+                         {/* Address management UI */}
+                         <button class="btn btn-secondary">管理地址</button>
+                     </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========= Showcase Section ========= -->
+        <section id="showcase" class="page-section">
+             <div class="showcase-container section-padding">
+                <h2>用户创意展示栏</h2>
+                 <div class="filter-sort-bar">
+                     {/* Filter/Sort controls */}
+                     <select>
+                         <option>最新发布</option>
+                         <option>最热作品</option>
+                     </select>
+                      <input type="text" placeholder="搜索作品...">
+                 </div>
+                <div class="gallery-grid large-grid">
+                     <!-- More placeholder cards -->
+                    <div class="creation-card">
+                        <img src="placeholder-creation-1.jpg" alt="创意作品 1">
+                        <div class="card-info">
+                            <h4>赛博朋克风格夜灯</h4>
+                            <p>由 用户A 分享</p>
+                            <div class="card-actions">❤️ 赞 | 💬 评论</div>
+                        </div>
+                    </div>
+                    <div class="creation-card">
+                        <img src="placeholder-creation-2.jpg" alt="创意作品 2">
+                        <div class="card-info">
+                            <h4>流体艺术花瓶</h4>
+                             <p>由 用户B 分享</p>
+                             <div class="card-actions">❤️ 赞 | 💬 评论</div>
+                        </div>
+                    </div>
+                    <div class="creation-card">
+                        <img src="placeholder-creation-3.jpg" alt="创意作品 3">
+                        <div class="card-info">
+                            <h4>定制化机械零件</h4>
+                             <p>由 企业C 分享</p>
+                             <div class="card-actions">❤️ 赞 | 💬 评论</div>
+                        </div>
+                    </div>
+                     <div class="creation-card">
+                        <img src="placeholder-creation-4.jpg" alt="创意作品 4">
+                        <div class="card-info">
+                            <h4>仿生机械臂</h4>
+                             <p>由 极客D 分享</p>
+                             <div class="card-actions">❤️ 赞 | 💬 评论</div>
+                        </div>
+                    </div>
+                 
+                </div>
+            </div>
+        </section>
+
+        <!-- ========= Learn & Support Section ========= -->
+        <section id="learn-support" class="page-section">
+            <div class="learn-support-container section-padding">
+                <h2>学习与支持</h2>
+                 <div class="support-grid">
+                    <div class="support-item">
+                        <h3>如何使用</h3>
+                        <p>查看我们的图文教程和视频指南。</p>
+                        <a href="#" class="btn btn-secondary">开始学习</a>
+                    </div>
+                     <div class="support-item">
+                        <h3>技术详解</h3>
+                        <p>了解平台背后的 AI 与制造技术。</p>
+                         <a href="#" class="btn btn-secondary">深入了解</a>
+                    </div>
+                     <div class="support-item">
+                        <h3>材料指南</h3>
+                        <p>探索各种可用材料的特性与应用。</p>
+                         <a href="#" class="btn btn-secondary">查看指南</a>
+                    </div>
+                     <div class="support-item">
+                        <h3>常见问题 (FAQ)</h3>
+                        <p>快速找到常见问题的答案。</p>
+                         <a href="#" class="btn btn-secondary">浏览 FAQ</a>
+                    </div>
+                     <div class="support-item">
+                        <h3>联系我们</h3>
+                        <p>需要帮助？通过在线聊天或邮件联系客服。</p>
+                         <a href="#" class="btn btn-secondary">获取支持</a>
+                    </div>
+                      <div class="support-item">
+                        <h3>关于我们</h3>
+                        <p>了解 NYG 的故事、愿景与使命。</p>
+                         <a href="#" class="btn btn-secondary">关于 NYG</a>
+                    </div>
+                 </div>
+            </div>
+        </section>
+
     </main>
 
-    <!-- 底部信息栏 -->
-    <footer class="bg-gray-800 text-white py-6">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div>
-                    <h3 class="text-lg font-semibold mb-3">关于我们</h3>
-                    <ul class="space-y-2 text-sm text-gray-300">
-                        <li><a href="#" class="hover:text-white">公司简介</a></li>
-                        <li><a href="#" class="hover:text-white">企业文化</a></li>
-                        <li><a href="#" class="hover:text-white">招贤纳士</a></li>
-                        <li><a href="#" class="hover:text-white">联系我们</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-3">购物指南</h3>
-                    <ul class="space-y-2 text-sm text-gray-300">
-                        <li><a href="#" class="hover:text-white">购物流程</a></li>
-                        <li><a href="#" class="hover:text-white">会员介绍</a></li>
-                        <li><a href="#" class="hover:text-white">常见问题</a></li>
-                        <li><a href="#" class="hover:text-white">支付方式</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-3">配送服务</h3>
-                    <ul class="space-y-2 text-sm text-gray-300">
-                        <li><a href="#" class="hover:text-white">配送政策</a></li>
-                        <li><a href="#" class="hover:text-white">配送范围</a></li>
-                        <li><a href="#" class="hover:text-white">运费标准</a></li>
-                        <li><a href="#" class="hover:text-white">物流跟踪</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-3">售后服务</h3>
-                    <ul class="space-y-2 text-sm text-gray-300">
-                        <li><a href="#" class="hover:text-white">退换货政策</a></li>
-                        <li><a href="#" class="hover:text-white">退换货流程</a></li>
-                        <li><a href="#" class="hover:text-white">投诉与建议</a></li>
-                        <li><a href="#" class="hover:text-white">服务保障</a></li>
-                    </ul>
-                </div>
+    <footer>
+        <div class="footer-content section-padding">
+            <div class="footer-links">
+                <a href="#">关于我们</a> |
+                <a href="#">联系方式</a> |
+                <a href="#">服务条款</a> |
+                <a href="#">隐私政策</a> |
+                <a href="#">帮助中心</a>
             </div>
-            <div class="mt-8 pt-6 border-t border-gray-700 text-center text-sm text-gray-400">
-                <p>© 2023 小商品商城 版权所有 ICP备案号: XXXXXXXX</p>
-                <div class="flex justify-center mt-4 space-x-4">
-                    <a href="#" class="text-gray-400 hover:text-white">
-                        <i class="fab fa-weixin text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-white">
-                        <i class="fab fa-weibo text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-white">
-                        <i class="fab fa-qq text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-white">
-                        <i class="fab fa-tiktok text-xl"></i>
-                    </a>
-                </div>
+            <div class="social-media">
+                
+                <a href="#">[微博]</a> <a href="#">[微信]</a> <a href="#">[酷+ ]</a>
             </div>
+            <p class="copyright">© 2025 NYG 三生万物 AI 创意平台. All Rights Reserved.</p>
         </div>
     </footer>
 
-    <script>
-        // 简单的轮播图逻辑
-        document.addEventListener('DOMContentLoaded', function() {
-            const carousel = document.querySelector('.carousel');
-            const carouselInner = carousel.querySelector('.carousel-inner');
-            const carouselItems = carousel.querySelectorAll('.carousel-item');
-            const prevBtn = carousel.querySelector('button:first-of-type');
-            const nextBtn = carousel.querySelector('button:last-of-type');
-            
-            let currentIndex = 0;
-            
-            function updateCarousel() {
-                carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
-            }
-            
-            prevBtn.addEventListener('click', function() {
-                currentIndex = (currentIndex === 0) ? carouselItems.length - 1 : currentIndex - 1;
-                updateCarousel();
-            });
-            
-            nextBtn.addEventListener('click', function() {
-                currentIndex = (currentIndex === carouselItems.length - 1) ? 0 : currentIndex + 1;
-                updateCarousel();
-            });
-            
-            // 自动轮播
-            setInterval(function() {
-                currentIndex = (currentIndex === carouselItems.length - 1) ? 0 : currentIndex + 1;
-                updateCarousel();
-            }, 5000);
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
